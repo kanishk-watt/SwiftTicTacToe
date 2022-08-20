@@ -29,66 +29,83 @@ class ViewController: UIViewController {
         }
         
         let rowColumn = getRowColumn(tag: btn.tag)
-        var response = ""
-        
-        if playerX.isTurn {
-            response = "\(PlayerType.X)"
-            playerX.makeMove(row: rowColumn.0, column: rowColumn.1) {[weak self] (state) in
-                self!.checkState(player: .X, state: state)
-            }
-        } else {
-            response = "\(PlayerType.O)"
-
-            playerO.makeMove(row: rowColumn.0, column: rowColumn.1) {[weak self] (state) in
-                self!.checkState(player: .O, state: state)
-            }
+        let checkState : (_ state : GameState) -> Void = { [weak self] (state) in
+            self!.checkState(player: PlayerType.O, state: state)
         }
+        let response = makePlayerMove(rowColumn: rowColumn, completion: checkState)
         
-        toggleTurn()
-        
-        btn.setTitle(response, for: .normal)
+        changeTurnLabel()
+        UIView.animate(withDuration: 0.2) { 
+            btn.setTitle(response, for: .normal)
+        }
         btn.isEnabled = false
     }
     
     @IBAction func resetGame(_ sender: Any) {
-        resetGame()
-    }
-    
-    func resetGame() {
-        statusView.alpha = 0
-        vStackView.alpha = 1
-        turnLabel.text = "X's Turn"
+        UIView.animate(withDuration: 0.5) { [self] in
+            statusView.alpha = 0
+            vStackView.alpha = 1
+            for i in 1...9 {
+                let btn = self.view.viewWithTag(i) as! UIButton
+                btn.setTitle("Tap", for: .normal)
+                btn.isEnabled = true
+            }
+        }
         playerX.reset()
         playerO.reset()
-        for i in 1...9 {
-            let btn = self.view.viewWithTag(i) as! UIButton
-            btn.setTitle("Tap", for: .normal)
-            btn.isEnabled = true
+        changeTurnLabel()
+    }
+    
+    func makePlayerMove(rowColumn : (Int, Int), completion : ((_ state : GameState) -> Void)) -> String {
+        var response = ""
+        
+        if playerX.isTurn {
+            response = "\(PlayerType.X)"
+            playerX.makeMove(row: rowColumn.0, column: rowColumn.1, completion: completion)
+        } else {
+            response = "\(PlayerType.O)"
+            playerO.makeMove(row: rowColumn.0, column: rowColumn.1, completion: completion)
         }
+        
+        toggleTurn()
+        
+        return response
     }
     
     func checkState(player : PlayerType, state : GameState) {
         switch state {
         case .Win:
-            statusView.alpha = 1
-            statusLabel.text = "\(player) Wins!"
-            vStackView.alpha = 0.2
+            UIView.animate(withDuration: 0.5) { [self] in
+                statusView.alpha = 1
+                statusLabel.text = "\(player) Wins!"
+                vStackView.alpha = 0.2
+            }
+            
         case .GameOn:
-            print("Game ON")
+            break
         case .Draw:
-            statusView.alpha = 1
-            statusLabel.text = "Draw!"
-            vStackView.alpha = 0.2
+            UIView.animate(withDuration: 0.5) { [self] in
+                statusView.alpha = 1
+                statusLabel.text = "Draw!"
+                vStackView.alpha = 0.2
+            }
         }
     }
     
     func toggleTurn() {
         playerX.isTurn = playerO.isTurn
         playerO.isTurn = !playerO.isTurn
+        
+    }
+    
+    func changeTurnLabel() {
         turnLabel.text = playerX.isTurn ? "X's Turn" : "O's Turn"
     }
     
     func getRowColumn(tag : Int) -> (Int, Int){
+        if tag > 9 || tag < 1 {
+            return (-1,-1)
+        }
         return ((tag - 1 ) / 3 , (tag - 1) % 3)
     }
     

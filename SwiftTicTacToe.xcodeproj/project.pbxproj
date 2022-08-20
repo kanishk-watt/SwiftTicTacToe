@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E086A5E28B0918300CE9D3D /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E086A5D28B0918300CE9D3D /* Player.swift */; };
 		1E24FA0528AF9FF40097BF24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E24FA0428AF9FF40097BF24 /* AppDelegate.swift */; };
 		1E24FA0728AF9FF40097BF24 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E24FA0628AF9FF40097BF24 /* SceneDelegate.swift */; };
 		1E24FA0928AF9FF40097BF24 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E24FA0828AF9FF40097BF24 /* ViewController.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E086A5D28B0918300CE9D3D /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		1E24FA0128AF9FF40097BF24 /* SwiftTicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftTicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E24FA0428AF9FF40097BF24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E24FA0628AF9FF40097BF24 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				1E24FA0628AF9FF40097BF24 /* SceneDelegate.swift */,
 				1E24FA0828AF9FF40097BF24 /* ViewController.swift */,
 				1E24FA3428AFAADF0097BF24 /* GameField.swift */,
+				1E086A5D28B0918300CE9D3D /* Player.swift */,
 				1E24FA0A28AF9FF40097BF24 /* Main.storyboard */,
 				1E24FA0D28AF9FF90097BF24 /* Assets.xcassets */,
 				1E24FA0F28AF9FF90097BF24 /* LaunchScreen.storyboard */,
@@ -264,6 +267,7 @@
 				1E24FA3528AFAADF0097BF24 /* GameField.swift in Sources */,
 				1E24FA0928AF9FF40097BF24 /* ViewController.swift in Sources */,
 				1E24FA0528AF9FF40097BF24 /* AppDelegate.swift in Sources */,
+				1E086A5E28B0918300CE9D3D /* Player.swift in Sources */,
 				1E24FA0728AF9FF40097BF24 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
