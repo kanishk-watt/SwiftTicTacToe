@@ -30,7 +30,8 @@ class ViewController: UIViewController {
         
         let rowColumn = getRowColumn(tag: btn.tag)
         let checkState : (_ state : GameState) -> Void = { [weak self] (state) in
-            self!.checkState(player: PlayerType.O, state: state)
+            let type = self!.playerX.isTurn ? PlayerType.X : PlayerType.O
+            self!.checkState(player: type, state: state)
         }
         let response = makePlayerMove(rowColumn: rowColumn, completion: checkState)
         
